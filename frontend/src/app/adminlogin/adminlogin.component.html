@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="video-container">
+  <video autoplay muted loop class="bg-video">
+    <source src="../../../assets/production_id_4473176 (2160p).mp4" type="video/mp4">
+  </video>
+
+          <div class="container-fluid content">
+            <div class="row">
+              <div class="col-sm-4 mx-auto">
+                <div class="card shadow" style="margin-top: 80px">
+                  <div class="card-header bg-white">
+          <h4>Admin Login</h4>
+        </div>
+        
+        <div class="card-body">
+          <form [formGroup]="fg" (submit)="validateadmin(fg.value)" novalidate>
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="userid"
+                required
+                name="userid"
+                placeholder="User Id"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['userid'].valid"
+                >User id must be given</small
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                formControlName="pwd"
+                required
+                name="password"
+                placeholder="Password"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['pwd'].valid"
+                >Password must be given</small
+              >
+            </div>
+            <input
+              type="submit"
+              value="Sign In"
+              class="btn btn-primary btn-block"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .video-container {
+    position: relative;
+    overflow: hidden;
+    height: 79vh;
+  }
+
+  .bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+</style>

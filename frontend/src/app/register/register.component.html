@@ -1,0 +1,153 @@
+<app-header></app-header>
+<video autoplay muted loop id="bg-video">
+  <source src="../../../assets/video (2160p) (3).mp4" type="video/mp4">
+</video> 
+<div class="container-fluid" style="position: relative;">
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <div class="card shadow" style="margin-top: 10px; background-color: rgba(255, 255, 255, 0.7);">
+        <div class="card-header bg-white">
+          <h4>Customer Registration</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="fg" (submit)="registeruser(fg.value)" novalidate>
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="name"
+                required
+                name="name"
+                placeholder="Customer Name"
+                class="form-control"
+              />
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['name'].hasError('required')">
+                Name must be given
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['name'].hasError('onlyAlphabets')">
+                Name must contain only alphabets
+              </small>
+            </div>
+            <div class="form-group">
+              <select
+                formControlName="city"
+                required
+                name="city"
+                class="form-control"
+                (change)="onCityChange($event)"
+              >
+                <option value="">Select City</option>
+                <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+                <option value="Other">Other</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['city'].hasError('required')">
+                City must be given
+              </small>
+              <input
+                *ngIf="showOtherCityInput"
+                type="text"
+                formControlName="otherCity"
+                required
+                name="otherCity"
+                placeholder="Enter City"
+                class="form-control mt-2"
+              />
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['otherCity']?.hasError('required')">
+               City must be given 
+              </small>
+            </div>
+            <div class="form-group">
+              <select
+                formControlName="gender"
+                required
+                name="gender"
+                class="form-control"
+              >
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['gender'].hasError('required')">
+                Gender must be selected
+              </small>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                formControlName="userid"
+                required
+                name="userid"
+                placeholder="Email Id"
+                class="form-control"
+              />
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['userid'].hasError('required')">
+                Email id must be given
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['userid'].hasError('email')">
+                Email must be valid
+              </small>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                maxlength="10"
+                formControlName="phone"
+                required
+                name="phone"
+                placeholder="Mobile No"
+                class="form-control"
+              />
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['phone'].hasError('required')">
+                Mobile no must be given
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['phone'].hasError('pattern')">
+                Mobile no must be 10 digits
+              </small>
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                formControlName="pwd"
+                required
+                name="pwd"
+                placeholder="Password"
+                class="form-control"
+              />
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['pwd'].hasError('required')">
+                Password must be given
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && fg.controls['pwd'].hasError('passwordStrength')">
+                Password must be at least 8 characters long, contain upper and lower case letters, a number, and a special character
+              </small>
+            </div>
+            <input type="submit" value="Register" class="btn btn-primary float-right" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+  }
+
+  .container-fluid {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+

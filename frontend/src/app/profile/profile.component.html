@@ -1,0 +1,92 @@
+ <app-header></app-header>
+<div class="video-container">
+  <video autoplay muted loop class="bg-video">
+    <source src="../../../assets/video (2160p) (3).mp4" type="video/mp4">
+  </video>
+  <div class="container">
+    <div class="center-box">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar"></div>
+          <h2>{{ uinfo.name }}</h2>
+        </div>
+        <div class="profile-content">
+          <div class="profile-info">
+            <p><strong>Email:</strong> {{ uinfo.userid }}</p>
+            <p><strong>Phone:</strong> {{ uinfo.phone }}</p>
+            <p><strong>Gender:</strong> {{ uinfo.gender }}</p>
+            <p><strong>City:</strong> {{ uinfo.city }}</p>
+          </div>
+          <button *ngIf="!editing" (click)="editProfile()">Update Profile</button>
+        </div>
+      </div>
+
+      <div *ngIf="editing" class="update-form-container">
+        <h3>Update Profile</h3>
+        <form [formGroup]="fg" (ngSubmit)="onSubmit()" class="update-form">
+          <label>
+            Name:
+            <input type="text" formControlName="name" [(ngModel)]="uinfo.name" required pattern="[a-zA-Z ]*">
+            <small *ngIf="submitted && fg.get('name').errors?.['required']" class="form-text text-danger">Name is required</small>
+            <small *ngIf="submitted && fg.get('name').errors?.['pattern']" class="form-text text-danger">Name must contain only alphabets</small>
+          </label>
+          <label>
+            Email:
+            <input type="email" formControlName="userid" [(ngModel)]="uinfo.userid" required>
+            <small *ngIf="submitted && fg.get('userid').errors?.['required']" class="form-text text-danger">Email is required</small>
+          </label> 
+          
+          <label>
+            Phone:
+            <input type="tel" maxlength="10" formControlName="phone" [(ngModel)]="uinfo.phone" required pattern="[0-9]{10}">
+            <small *ngIf="submitted && fg.get('phone').errors?.['required']" class="form-text text-danger">Phone is required</small>
+            <small *ngIf="submitted && fg.get('phone').errors?.['pattern']" class="form-text text-danger">Phone must be 10 digits</small>
+          </label>
+          <label>
+            Gender:
+            <input type="text" formControlName="gender" [(ngModel)]="uinfo.gender" required>
+            <small *ngIf="submitted && fg.get('gender').errors?.['required']" class="form-text text-danger">Gender is required</small>
+          </label>
+          <label>
+            City:
+            <select formControlName="city" [(ngModel)]="uinfo.city" (change)="checkCity()">
+              <option value="">Select City</option>
+              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+              <option value="other">Other</option>
+            </select>
+            <input *ngIf="otherCity" type="text" formControlName="city" [(ngModel)]="uinfo.city" name="city" placeholder="Enter your city" class="form-control">
+            <small *ngIf="submitted && fg.get('city').errors?.['required']" class="form-text text-danger">City is required</small>
+          </label>
+          <div class="button-group">
+            <button type="submit" class="save-button">Save</button>
+            <button type="button" (click)="cancelEdit()" class="cancel-button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .video-container {
+    position: relative;
+    overflow: hidden;
+    height: 79vh;
+  }
+
+  .bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+

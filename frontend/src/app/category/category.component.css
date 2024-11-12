@@ -1,0 +1,19 @@
+.btn {
+    width: 100%; /* Make buttons full width */
+    margin-bottom: 5px; /* Add some space between buttons */
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .btn-sm {
+    font-size: 0.875rem; /* Small button text size */
+    padding: 0.25rem 0.5rem; /* Small button padding */
+  }

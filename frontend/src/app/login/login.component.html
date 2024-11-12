@@ -1,0 +1,118 @@
+<app-header></app-header>
+<video autoplay muted loop id="bg-video">
+  <source src="../../../assets/production_id_4762243 (1080p).mp4" type="video/mp4">
+</video>
+<div class="container-fluid" style="height: 79vh; position: relative;">
+  <div class="row">
+    <div class="col-sm-4 mx-auto">
+      <div class="card shadow" style="margin-top: 80px; background-color: rgba(255, 255, 255, 0.7);">
+        <div class="card-header bg-white">
+          <h4>Customer Login</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="fg" (submit)="validate(fg.value)" novalidate>
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="userid"
+                required
+                name="userid"
+                placeholder="User Id"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['userid'].valid"
+                >User id must be given</small
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                formControlName="pwd"
+                required
+                name="password"
+                placeholder="Password"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['pwd'].valid"
+                >Password must be given</small
+              >
+            </div>
+            <input
+              type="submit"
+              value="Sign In"
+              class="btn btn-primary btn-block"
+            />
+          </form>
+          
+        </div>
+        <!-- <div class="card-header bg-white">
+          <h4>Admin Login</h4>
+          <form [formGroup]="fg" (submit)="validateadmin(fg.value)" novalidate>
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="userid"
+                required
+                name="userid"
+                placeholder="User Id"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['userid'].valid"
+                >User id must be given</small
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                formControlName="pwd"
+                required
+                name="password"
+                placeholder="Password"
+                class="form-control"
+              />
+              <small
+                class="form-text text-danger"
+                *ngIf="submitted && !fg.controls['pwd'].valid"
+                >Password must be given</small
+              >
+            </div>
+            <input
+            type="submit"
+            value="Sign In"
+            class="btn btn-primary btn-block"
+          />
+          </form>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<style>
+  #bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+  }
+
+  .container-fluid {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
